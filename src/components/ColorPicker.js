@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ColorPicker = ({ onColorChange }) => {
+    const [selectedColor, setSelectedColor] = useState('#000000');
     const colors = [
         '#000000', // Black
         '#FF0000', // Red
@@ -12,6 +13,13 @@ const ColorPicker = ({ onColorChange }) => {
         '#FFFFFF', // White
     ];
 
+    const handleColorClick = (color) => {
+        console.log(`Selected color: ${color}`);
+        
+        setSelectedColor(color);
+        onColorChange(color);
+    };
+
     return (
         <div>
             <div style={styles.container}>
@@ -21,9 +29,11 @@ const ColorPicker = ({ onColorChange }) => {
                         style={{
                             ...styles.colorBox,
                             backgroundColor: color,
-                            border: color === '#FFFFFF' ? '1px solid #ddd' : 'none'
+                            border: color === '#FFFFFF' ? '1px solid #ddd' : 'none',
+                            outline: color === selectedColor ? '3px solid #666' : 'none',
+                            outlineOffset: '2px'
                         }}
-                        onClick={() => onColorChange(color)}
+                        onClick={() => handleColorClick(color)}
                     />
                 ))}
             </div>
@@ -32,12 +42,18 @@ const ColorPicker = ({ onColorChange }) => {
                 <input
                     type="text"
                     placeholder="Enter hex color (e.g., #FF5733)"
+                    value={selectedColor}
+                    onChange={(e) => {
+                        const hexColor = e.target.value.trim();
+                        setSelectedColor(hexColor);
+                    }}
                     onBlur={(e) => {
                         const hexColor = e.target.value.trim();
                         if (/^#([0-9A-F]{3}|[0-9A-F]{6})$/i.test(hexColor)) {
-                            onColorChange(hexColor);
+                            handleColorClick(hexColor);
                         } else {
                             alert('Invalid hex color format');
+                            setSelectedColor(selectedColor);
                         }
                     }}
                     style={{ marginTop: '10px', padding: '5px', width: '200px' }}
@@ -60,7 +76,7 @@ const styles = {
         height: '30px',
         borderRadius: '4px',
         cursor: 'pointer',
-        transition: 'transform 0.2s ease',
+        transition: 'all 0.2s ease',
         ':hover': {
             transform: 'scale(1.1)',
         }
