@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Canvas from './components/Canvas';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header style={{padding: '20px', textAlign: 'center', background: '#a31ce2', color: '#fff', fontSize: '24px', fontFamily: 'Arial, sans-serif'}}>
+        Pixel Canvas
       </header>
+      <div className="canvas-container">
+        <div id="canvas">
+          <div className="pixel-grid">
+            <Canvas />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

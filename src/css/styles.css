@@ -1,0 +1,30 @@
+.canvas-container {
+    display: flex;
+    flex-direction: column;  /* ← this is the key */
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    padding: 2%;
+  }
+  
+  .canvas-row {
+    display: flex;
+    flex-direction: row;
+  }  
+  
+  .pixel-cell {
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 0.05rem solid #ddd;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
+  .pixel-cell:hover {
+    outline: 1px solid #888;
+  }
+  
