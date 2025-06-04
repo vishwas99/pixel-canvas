@@ -1,12 +1,17 @@
 // src/components/PixelCell.js
 import React, { useState } from 'react';
-import '../css/styles.css'; // Assuming you have a CSS file for styling
+import '../css/styles.css';
 
-export default function PixelCell({ row, col }) {
+export default function PixelCell({ row, col, selectedColor }) {
   const [color, setColor] = useState(null);
 
   const handleClick = () => {
-    setColor(prev => (prev ? null : '#4444ff'));
+    setColor(prev => {
+      if(prev === selectedColor) {
+        return null;
+      }
+      return selectedColor;
+    });
   };
 
   return (

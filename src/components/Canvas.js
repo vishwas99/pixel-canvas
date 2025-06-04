@@ -7,7 +7,7 @@ const INITIAL_ROWS = 80;
 const INITIAL_COLUMNS = 200;
 const COLUMN_INCREMENT = 50;
 
-export default function Canvas() {
+const Canvas = ({ selectedColor }) => {
   const [columns, setColumns] = useState(INITIAL_COLUMNS);
   const canvasRef = useRef(null);
 
@@ -24,12 +24,19 @@ export default function Canvas() {
     return () => canvas.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Update your pixel click handler to use selectedColor instead of a hardcoded color
+  const handlePixelClick = (pixelId) => {
+    // Your existing click handler logic, but use selectedColor
+  };
+
   return (
     <div className="canvas-container" ref={canvasRef}>
         {Array.from({ length: INITIAL_ROWS }).map((_, rowIndex) => (
-            <CanvasRow key={rowIndex} rowIndex={rowIndex} columns={columns} />
+            <CanvasRow key={rowIndex} rowIndex={rowIndex} columns={columns} selectedColor={selectedColor} />
         ))}
     </div>
 
   );  
 }
+
+export default Canvas;
